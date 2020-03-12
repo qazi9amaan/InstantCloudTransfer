@@ -216,6 +216,12 @@
                               <p>Delete</p>
                           </a>
                       </li> 
+                      <li class="nav-item ">
+                          <a href="shortner.php" class="nav-link">
+                               <i class="pe-7s-scissors"></i>
+                                  <p>Shorten URl</p>
+                          </a>
+                    </li> 
 
                       <?php 
 

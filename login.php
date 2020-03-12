@@ -236,6 +236,12 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6, p, .navbar, .brand {
                               <p>Delete</p>
                           </a>
                       </li> 
+                      <li class="nav-item ">
+                          <a href="shortner.php" class="nav-link">
+                               <i class="pe-7s-scissors"></i>
+                                  <p>Shorten URl</p>
+                          </a>
+                    </li> 
                       <li class="nav-item active">
                           <a href="login.php" class="nav-link">
                                <i class="pe-7s-user"></i>

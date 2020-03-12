@@ -199,40 +199,39 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6, p, .navbar, .brand {
 }
 
 
+
   </style>
   <body>
     
 
 
 
-<!--Model Popup starts-->
-<div class="container">
-    <div class="row">
-        <a class="btn btn-primary" data-toggle="modal" href="#ignismyModal">open Popup</a>
-        <div class="modal fade" id="ignismyModal" role="dialog">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label=""><span>×</span></button>
-                     </div>
-          
-                    <div class="modal-body">
-                       
-            <div class="thank-you-pop">
-              <img src="http://goactionstations.co.uk/wp-content/uploads/2017/03/Green-Round-Tick.png" alt="">
-              <h1>Thank You!</h1>
-              <p>Your submission is received and we will contact you soon</p>
-              <h3 class="cupon-pop">Your Id: <span>12345</span></h3>
-              
-            </div>
-                         
-                    </div>
-          
-                </div>
-            </div>
+
+ <!-- Modal -->
+  <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Shorten url</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span style="color: #ffc300;" aria-hidden="true">&times;</span>
+          </button>
         </div>
+        <div class="modal-body">
+         <input  style = "width: 100%;" class = "lead" type="text" name="" id="myInput" value="<?php echo (isset($_GET['m']))?$_GET['m']  :'';?>" >
+        </div>
+        <div class="modal-footer" style="
+      margin-top: -27px;
+  ">
+          <button hidden type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button"  onclick="myFunction()"  id = "copybtn"class="btn btn-primary yellow"> Copy</button>
+        </div>
+      </div>
     </div>
-</div>
+  </div>
+
+
 
     <!-- Navigation -->
 
@@ -272,6 +271,12 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6, p, .navbar, .brand {
                           </a>
                       </li> 
                       <li class="nav-item ">
+                          <a href="shortner.php" class="nav-link">
+                               <i style = "color: #ffc300;" class="pe-7s-scissors"></i>
+                                  <p>Shorten URl</p>
+                          </a>
+                    </li>   
+                    <li class="nav-item ">
                           <a href="login.php" class="nav-link">
                                <i class="pe-7s-user"></i>
                                   <p>Login</p>
@@ -280,7 +285,6 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6, p, .navbar, .brand {
                </ul>
   </div></div>
 </nav></div></div>
-
 
 
 
@@ -314,8 +318,7 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6, p, .navbar, .brand {
                     </form>
                 </div>
             </div>
-        </div>
-
+        </div></div>
 
 
       

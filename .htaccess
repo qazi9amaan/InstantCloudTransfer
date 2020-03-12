@@ -1,0 +1,17 @@
+
+Options +FollowSymLinks
+RewriteEngine On
+ 
+RewriteCond %{SCRIPT_FILENAME} !-d
+RewriteCond %{SCRIPT_FILENAME}.php -f
+
+RewriteRule ^shortner shortner.php
+
+RewriteRule ^404 404.php
+RewriteRule ^create shortnerhelper.php
+
+RewriteRule ^(\w+)$ ./shortner.php?title=$1
+
+ 
+ 
+

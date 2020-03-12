@@ -9,6 +9,9 @@ RewriteRule ^shortner shortner.php
 
 RewriteRule ^404 404.php
 RewriteRule ^create shortnerhelper.php
+RewriteRule ^thankyou$ thankyou.php
+
+RewriteRule ^thankyou/([0-9a-zA-Z_-]+/[0-9a-zA-Z_-]+.[0-9a-zA-Z_-]+) thankyou.php?url=$1
 
 RewriteRule ^(\w+)$ ./shortner.php?title=$1
 

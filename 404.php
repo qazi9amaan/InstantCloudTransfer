@@ -1,7 +1,7 @@
 <?php
     if(isset($_POST['Home']))
     {
-        header('Location:shortner');
+        header('Location:index.php');
     }
 
 ?>

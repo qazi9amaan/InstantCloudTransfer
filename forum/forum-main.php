@@ -18,12 +18,12 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="fonts/pe-icon-7-stroke/css/pe-icon-7-stroke.css">
+    <link rel="stylesheet" href="../fonts/pe-icon-7-stroke/css/pe-icon-7-stroke.css">
     <link href="http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Grand+Hotel' rel='stylesheet' type='text/css'>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
-     <link href="css/ct-navbar.css" rel="stylesheet" />  
-    <title>Kirangle | Cloud Share</title>
+    <script src="../ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+     <link href="../css/ct-navbar.css" rel="stylesheet" />  
+    <title>Kirangle | My Forums</title>
   </head>
 
   <style>
@@ -270,7 +270,7 @@ font-size: 32px;
     <nav class="navbar navbar-expand-lg  navbar-dark navbar-ct-black   absolute-top">
       <div class="container">
       <div class="collapse navbar-end navbar-collapse" id="navbarSupportedContent">
-  <a data-user = "<?php echo $_SESSION['broadcastchannel']; ?>" class="navbar-brand check" href="#" id= "channelname" style="MAX-WIDTH: 123PX;
+  <a hidden data-user = "<?php echo $_SESSION['broadcastchannel']; ?>" class="navbar-brand check" href="#" id= "channelname" style="MAX-WIDTH: 123PX;
     PADDING-LEFT: 10PX;
     font-size: 25px;
     font-weight: 400;
@@ -284,7 +284,7 @@ font-size: 32px;
     <form class="navbar-form mr-4 mt-0 mb-0 my-auto d-flex justify-content-center w-72" role="search">
             <div class="input-group">
             
-                <input required type="search" id = "search_text" class="form-control search" style=" margin-top :1px; margin-left: 10px;background:rgba(0, 0, 0, 0.1);padding : 22px;border-radius: 5px;" placeholder="Room number">
+                <input required type="search" id = "search_text" class="form-control search" style=" margin-top :1px; margin-left: 10px;background:rgba(0, 0, 0, 0.1);padding : 22px;border-radius: 5px;" placeholder="Forum name">
                 <span class="input-group-btn">
                         <button id = "searchbtn" onclick='search()'; class="btn btn-default">
                         <i class="pe-7s-search"></i>
@@ -329,25 +329,19 @@ font-size: 32px;
 
 <div class="container mt-4 ">
 <ul class="nav nav-pills nav-fill">
-  <li class="nav-item mr-2">
-    <a class="nav-link " href="broadcast">
-        <i class="pe-7s-cloud-upload"></i>
-                                <p>Broadcast</p>
-
-    </a>
-  </li>
-  <li class="nav-item mr-2">
-    <a class="nav-link " href="download">
-        <i class="pe-7s-cloud-download"></i>
-                                <p>Download</p>
+ 
+     <li class="nav-item mr-2">
+    <a class="nav-link " href="forum">
+        <i class="pe-7s-user"></i>
+                                <p> My Broadcasts</p>
 
     </a>
   </li>
   
   <li class="nav-item mr-2">
-    <a class="nav-link " href="forum\forum-main.php">
+    <a class="nav-link " href="newforum.php">
         <i class="pe-7s-users"></i>
-                                <p>Forum</p>
+                                <p>Start a forum</p>
 
     </a>
   </li>
@@ -355,7 +349,7 @@ font-size: 32px;
 </div>
 
  <div class=" container mt-5">
-   <h1 responsive class="display-4">Multiple Share Records</h1>
+   <h1 responsive class="display-4">My Forums</h1>
 
     <div class="card-columns">
     </div>

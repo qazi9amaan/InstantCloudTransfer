@@ -1,3 +1,96 @@
+<?php
+
+function deletetheurl($id)
+{
+  $conn = mysqli_connect('localhost', 'root', '','urlshortner');
+  $sql = "DELETE FROM urlhandler  WHERE shortkey= '$id'";
+ 
+  if (!mysqli_query($conn, $sql)) {
+    header('Location:404');
+  }
+
+}
+function delete_file($bid ,$filename)
+{
+  $conn = mysqli_connect('localhost', 'root', '','instantsharing');
+  $sql = "DELETE FROM storage  WHERE bid= '$bid' and sharingmode = 'single'";
+ 
+     if (mysqli_query($conn, $sql)) {
+       //deleting tinyurl
+   
+     }
+     else{
+      header('Location:404');
+     }
+}
+
+function increasedownloadcount($bid)
+{
+
+  $conn = mysqli_connect('localhost', 'root', '','instantsharing');
+  $sql = "UPDATE storage  SET downloadcount = downloadcount +1 WHERE bid= '$bid'";
+   if (mysqli_query($conn, $sql)) {
+ 
+      delete_file($bid ,$filename,$id);
+ 
+  }else{
+    echo "updation error".mysqli_error($conn);
+  }
+}
+
+function getFilename($bid)
+{
+  $conn = mysqli_connect('localhost', 'root', '','instantsharing');
+  $sql = "SELECT filename FROM storage WHERE bid= '$bid'";
+ 
+ $filename =  null;
+    $result = mysqli_query($conn, $sql);
+      if (mysqli_num_rows($result) == 0) { 
+              header('Location:404');
+               }
+          else{
+            $row = mysqli_fetch_assoc($result);
+            $filename=$row["filename"];
+           
+            
+          }
+          return $filename ;
+}
+
+  if(isset($_POST['download_link'])){
+     
+    if(!empty($_POST['bid']))
+    { 
+      $conn = mysqli_connect('localhost', 'root', '','instantsharing');
+      $filename = getFilename($_POST['bid']);
+      $files = scandir("result");
+   
+      for($a=1;$a<count($files);$a++)
+      {
+          if($files[$a] ===  $filename )
+          {
+            
+          increasedownloadcount($_POST['bid']);     
+          deletetheurl($_POST['id']);
+           $file = ("result/$filename");
+           $filetype=filetype($file);
+           $filename=basename($file);
+           header ("Content-Type: ".$filetype);
+           header ("Content-Length: ".filesize($file));
+           header ("Content-Disposition: attachment; filename=".$filename);
+           readfile($file);
+
+
+           
+          }
+      }
+      
+      
+          }
+        }
+  
+
+?>
 
 <!doctype html>
 <html lang="en">
@@ -279,8 +372,11 @@ a {
     <h1 center class = "display-2"> Thankyou! </h1>
       <h1 style = "text-align: center"class = "display-5"> Your download link is ready! </h1>
       <p style = "text-align: center"class="lead">We hope that you loved your services, see you soon!</p>
-      
-       <a download href="<?php echo (isset($_GET['url']))?$_GET['urldecode(str)']  :'';?>" class="btn btn-default yellow" role="button">Download </a>
+      <form action="/test2/thankyou.php" method="POST">
+      <input hidden type="text" name ='bid' value=" <?php echo $_GET['bid']; ?>">
+      <input hidden type="text" name ='id' value=" <?php echo $_GET['id']; ?>">
+      <input type="submit" class="btn btn-default yellow" name = "download_link" value="Download">
+      </form>
   </div>
 </div>
  

@@ -41,7 +41,7 @@
 		VALUES ('$word', '$url')";
 
 		if (mysqli_query($conn, $sql)) {
-			
+			echo 'done';
 		} else {
 		    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
 		}
@@ -72,34 +72,8 @@
     	}
 	}
 	//under construction
-	// function showtoastto($word,$ret){
-	// 	$msg= '<script>alert('.$word.')</script>';
-	// 	header('Location:kirangle.com');
-	// }
-
-
-	// if(isset($_GET['link']) && isset($_GET['ret']))
-  	// {
-    // 	if(empty($_GET['link'])&& empty($_GET['ret']))
-    // 	{
-    // 		//error handling
-    // 		echo "Please provide an input";
-    		
-    // 	}else{
-	// 		$ret = $_GET['ret'];
-    // 		$word = getRandomword(6);
-    // 		$url = $_POST['requested'];
-    // 		while(!israndomindb($word,$conn))
-    // 		{
-    // 			$word = getRandomword(6);
-    // 		}
-    // 		shortentheurl($word,$url,$conn);
-    // 		$msg = $word;
-	// 	    showtoastto($msg,$ret);
-    // 	}
-    // }
-
-
+	
+	
 
 
 

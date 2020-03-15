@@ -1,7 +1,11 @@
-<?php 
-   
-  
- ?>
+<?php
+   session_start();
+   if(!isset($_SESSION['status']))
+    {
+      header("location:index.php");
+    }
+?>
+
 
 <!doctype html>
 <html lang="en">
@@ -14,12 +18,12 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="fonts/pe-icon-7-stroke/css/pe-icon-7-stroke.css">
+    <link rel="stylesheet" href="../fonts/pe-icon-7-stroke/css/pe-icon-7-stroke.css">
     <link href="http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Grand+Hotel' rel='stylesheet' type='text/css'>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
-     <link href="css/ct-navbar.css" rel="stylesheet" />  
-    <title>Kirangle | Login Now</title>
+    <script src="..//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+     <link href="../css/ct-navbar.css" rel="stylesheet" />  
+    <title>Kirangle | New Forum </title>
   </head>
 
   <style>
@@ -33,7 +37,7 @@
       background:#2d2d2d ;
       box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
 }
-.login-form-2 .display-3{
+.login-form-2 .display-4{
     
     color: #373737;
     margin-bottom: 40px;
@@ -200,7 +204,7 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6, p, .navbar, .brand {
   <a class="navbar-brand check" href="index.php" style="
     font-size: 25px;
     font-weight: 400;
-">KIRANGLE ZONE</a>
+">CREATE A FORUM</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" >
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -215,31 +219,28 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6, p, .navbar, .brand {
                                 <p>Broadcast</p> 
                           </a>
                       </li> 
-                       <li class="nav-item">
-                          <a href="download.php" class="nav-link">
-                               <i class="pe-7s-cloud-download"></i>
-                                <p>Download</p>
+                      
+                     
+                     <li class="nav-item ">
+                          <a href="broadcast.php" class="nav-link">
+                               <i class="pe-7s-users"></i>
+                                <p>Forum</p> 
                           </a>
                       </li> 
+                     
                       <li class="nav-item">
-                          <a href="delete.php" class="nav-link">
-                              <i class="pe-7s-trash">
-                                              </i>
-                              <p>Delete</p>
-                          </a>
-                      </li> 
-                      <li class="nav-item ">
-                          <a href="shortner.php" class="nav-link">
-                               <i class="pe-7s-scissors"></i>
-                                  <p>Shorten URl</p>
-                          </a>
-                    </li> 
-                      <li class="nav-item active">
-                          <a href="login.php" class="nav-link">
+                          <a href="account.php" class="nav-link">
                                <i class="pe-7s-user"></i>
-                                  <p>Login</p><span class="sr-only">(current)</span>
+                                  <p>Account</p>
                           </a>
                     </li>   
+                      <li class="nav-item ">
+                          <a href="logout.php?logout" class="nav-link">
+                               <i class="pe-7s-power"></i>
+                                  <p>Logout</p>
+                          </a>
+                    </li>   
+                   
                </ul>
   </div></div>
 </nav></div></div>
@@ -249,23 +250,24 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6, p, .navbar, .brand {
             <div class="row">
                <div class="col col-sm-12 col-md-6 col-lg-6 login-form-1">
                   <div class="info">
-                    <h1 class="display-4">LOGIN TO YOUR CHANNEL</h1>
-                    <p class="lead">You can check the status of your live broadcast's in your console anytime. Delete your multi-shared broadcasts once sharing is complete </p>
-                    <p class="lead">To ensure privacy, we delete your single-shared broadcast after a download and the room is made available for next broadcast </p>
+                    <h1 class="display-4">NEW FORUM</h1>
+                    <p class="lead">Forums allow you to dedicate your broadcast to a particular field. People with same intrests can come to your forum and share there views</p>
+                    <p class="lead">Forum names are unqiue, there are always public. You can choose to the privacy of the forum either you can mute public comments or allow them. You can change the ownership of your forum. </p>
+
                   </div>
                 </div>
                 <div class="col col-sm-12 col-md-6 col-lg-6 login-form-2">
-                  <h1 class="display-3">VIEW YOUR CHANNEL</h1>
+                  <h1 class="display-4">START A DISCUSSION</h1>
                     
-                    <form action="authentication.php"  method="post">
+                    <form action="#"  method="post">
                         <div class="form-group">
-                            <input type="text" name = "broadcastchannel" class="form-control" placeholder="Channal Name *"  />
+                            <input required type="text" name ="" class="form-control" placeholder="Channel Name *"/>
                         </div>
                         <div class="form-group">
-                            <input type="password" name = "authcode" class="form-control" placeholder="Authentication code *"  />
+                            <input required type="text" name = "" class="form-control" placeholder="Room Number *" />
                         </div>
                         <div class="form-group">
-                            <input type="submit" name = "login" class="btnSubmit" value="Login" />
+                            <input type="submit" name = "download" class="btnSubmit" value="Download" />
                         </div>
                         
                     </form>

@@ -176,8 +176,69 @@
   .input-group-text{
     color: #e4e4e4;
   }
+
+  .modal-header {
+      border-bottom: none;
+    }
+
+.modal-footer {   
+    border-top: none;
+}
+.modal{
+  color : #ffc300;
+}
+.modal-content{
+  background: #333;
+}
+.yellow:hover{
+  width: 25%;
+  background: #ffc300;
+  border-color: #ffc300;
+}
+.yellow{
+  width: 25%;
+  background: #333;
+  color: #ffc300;
+
+}
+.showurl{
+   background: #333;
+  color: #ffc300;
+  
+       height: 65px;
+    border: 1px solid #ffc300;
+    
+}
+
   </style>
   <body>
+
+
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Shorten url</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span style="color: #ffc300;" aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+         <input  style = "width: 100%;" class = "lead showurl" type="text" name="" id="myInput" value="<?php echo (isset($_GET['m']))?$_GET['m']  :'';?>" >
+        </div>
+        <div class="modal-footer" style="
+      margin-top: -27px;
+  ">
+          <button hidden type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button"  onclick="myFunction()"  id = "copybtn"class="btn btn-primary yellow"> Copy</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
     
     <!-- Navigation -->
 
@@ -365,11 +426,33 @@
         $('.display-3').css('font-size', '3rem');
     }
 
+    function myFunction() {
+  var copyText = document.getElementById("myInput");
+  copyText.select();
+  copyText.setSelectionRange(0, 99999);
+  document.execCommand("copy");
+  document.location.href = 'home';
+  }  
+
   </script>
+
+
+
 
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+  
+  
+    <?php if(isset($_GET['m']))
+{
+  if(!empty($_GET['m']))
+  {
+    echo "<script>$('#exampleModalCenter').modal('show')</script>";
+  }
+}
+ ?>
+ 
   </body>
 </html>

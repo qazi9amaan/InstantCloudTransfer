@@ -6,7 +6,7 @@
         if(!empty($_GET['search'])){
             $channel =$_GET['user'];
             $search =$_GET['search'];
-            $sql = "SELECT * FROM storage WHERE broadcastchannel= '$channel' and roomnumber like '%$search%'";
+            $sql = "SELECT * FROM storage WHERE broadcastchannel= '$channel' and roomnumber like '%$search%' ORDER BY uploaddate DESC";
             
             if($result = mysqli_query($conn, $sql)){
                 if(mysqli_num_rows($result) > 0){                
@@ -45,7 +45,7 @@
     }else{
         if(isset($_POST['user'])){
                 $channel =$_POST['user'];
-                $sql = "SELECT * FROM storage WHERE broadcastchannel= '$channel' ";
+                $sql = "SELECT * FROM storage WHERE broadcastchannel= '$channel' ORDER BY uploaddate DESC ";
 
                 if($result = mysqli_query($conn, $sql)){
                     if(mysqli_num_rows($result) > 0){                

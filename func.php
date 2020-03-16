@@ -3,6 +3,7 @@
   require_once('connection.php');
   include('shortnerhelper.php');
   $siteurl = 'localhost/test2';
+  $conn = mysqli_connect('localhost', 'root', '','instantsharing');
 
 
 function getFilename($broadcastchannel ,$roomnumber)
@@ -90,9 +91,9 @@ function uploadlinktodb($broadcastchannel ,$roomnumber,$msg)
   }
 }
 
-function getshareablelink($filename,$broadcastchannel ,$roomnumber,$siteurl)
+function getshareablelink($filename,$broadcastchannel ,$roomnumber,$siteurl,$conn)
 {
-     $conn = mysqli_connect('localhost', 'root', '','instantsharing');
+     
      $sql = "SELECT * FROM storage WHERE broadcastchannel= '$broadcastchannel' and roomnumber = '$roomnumber' and filename = '$filename'";
   
         $result = mysqli_query($conn, $sql);
@@ -171,7 +172,7 @@ function presentindb($channel,$room){
 // BROADCASTING CONTENT
   if(isset($_POST['broadcast']))
   { 
-    $broadcastchannel =  $_POST['broadcastchannel'];
+    $broadcastchannel =  $_POST['broadcast'];
     
     if(isset($_SESSION['status'])){
       $broadcastchannel =  $_SESSION['broadcastchannel'];
@@ -219,7 +220,7 @@ function presentindb($channel,$room){
                 }
                 $zip->close();
                 savetodb($file_name_zip ,$broadcastchannel,$_POST['roomnumber'],$_POST['sharingmode']);
-                getshareablelink($filename ,$broadcastchannel,$_POST['roomnumber'],$siteurl);
+                getshareablelink($filename ,$broadcastchannel,$_POST['roomnumber'],$siteurl,$conn);
           }
           else{
                     $files = $_FILES['upload'];
@@ -227,7 +228,7 @@ function presentindb($channel,$room){
                     $filename = $files['name'][0];
                     move_uploaded_file($tmp, 'result/'.$filename);
                     savetodb($filename ,$broadcastchannel,$_POST['roomnumber'],$_POST['sharingmode']);
-                    getshareablelink($filename ,$broadcastchannel,$_POST['roomnumber'],$siteurl);
+                    getshareablelink($filename ,$broadcastchannel,$_POST['roomnumber'],$siteurl,$conn);
           }
         }else{
           // error provide username
@@ -240,6 +241,17 @@ function presentindb($channel,$room){
 
     echo "done" ;
   }
+
+
+
+
+
+
+// UPLOADING TO FORUM
+
+
+
+
 
 
 

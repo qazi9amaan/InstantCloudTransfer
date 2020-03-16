@@ -79,6 +79,7 @@
 	            {
 	                $_SESSION['broadcastchannel']=$_POST['broadcastchannel'];
 	                $_SESSION['status']='active';
+	                
 	                header("location:account.php");
 	            }
 	            else

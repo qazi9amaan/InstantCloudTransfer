@@ -328,14 +328,18 @@ font-size: 32px;
 </nav></div></div>
 
 <div class="container mt-4 ">
+
 <ul class="nav nav-pills nav-fill">
-  <li class="nav-item mr-2">
-    <a class="nav-link " href="broadcast">
+
+
+   <li class="nav-item mr-2">
+    <a class="nav-link " href="download">
         <i class="pe-7s-cloud-upload"></i>
                                 <p>Broadcast</p>
 
     </a>
   </li>
+
   <li class="nav-item mr-2">
     <a class="nav-link " href="download">
         <i class="pe-7s-cloud-download"></i>

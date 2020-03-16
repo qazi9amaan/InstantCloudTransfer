@@ -259,8 +259,11 @@ font-size: 32px;
   shadow :none;
 }
 
-
+.visiter:hover {
+  background: #373737;
+}
   </style>
+  
   <body>
     
     <!-- Navigation -->
@@ -331,7 +334,7 @@ font-size: 32px;
 <ul class="nav nav-pills nav-fill">
  
      <li class="nav-item mr-2">
-    <a class="nav-link " href="forum">
+    <a class="nav-link " href="../home">
         <i class="pe-7s-user"></i>
                                 <p> My Broadcasts</p>
 
@@ -352,7 +355,7 @@ font-size: 32px;
    <h1 responsive class="display-4">My Forums</h1>
 
     <div class="card-columns">
-    </div>
+    </div>    
   </div>
   <br>
 
@@ -366,6 +369,20 @@ font-size: 32px;
 
 
     <!-- Optional JavaScript -->
+    
+   
+
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ajax-bootstrap-select/1.4.5/js/ajax-bootstrap-select.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+
+
     <script>
     
    
@@ -379,14 +396,6 @@ font-size: 32px;
 
   </script>
 
-   
-
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/ajax-bootstrap-select/1.4.5/js/ajax-bootstrap-select.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
     <script>
        $(document).ready(function(){
@@ -424,9 +433,9 @@ font-size: 32px;
         }else{
           clearInterval(showall);
           $.ajax({
-            url:"fetchdata.php", 
+            url:"fetchallforums.php", 
                 method:"GET",
-                data:'search='+x+'&user='+$('#channelname').attr("data-user"),
+                data:'searchforum=true&search='+x+'&user='+$('#channelname').attr("data-user"),
                 success:function(data){  
                      $('.card-columns').html(data);  
                 }  
@@ -450,9 +459,10 @@ font-size: 32px;
    function fetch_data()  
       {  
            $.ajax({  
-                url:"fetchdata.php",  
+                url:"fetchallforums.php",  
                 method:"POST",
                 data:{
+                  showallforums:true,
                   user: $('#channelname').attr("data-user")
                 },
                 success:function(data){  
@@ -464,56 +474,11 @@ font-size: 32px;
     
 
 
-    $(document).on('click', '#btn_delete', function(){  
-           var id=$(this).data("id2"); 
-            
-           if(confirm("Are you sure you want to delete this?"))  
-           {  
-                $.ajax({  
-                     url:"deletetheitem.php",  
-                     method:"POST",  
-                     data:{id:id},  
-                     dataType:"text",  
-                     success:function(data){  
-                          alert(data);  
-                          fetch_data();  
-                     }  
-                });  
-           }  
-    });  
 
-
-    $(document).on('click', '#btn_toggle', function(){  
-           var multishareid=$(this).data("id3"); 
-           var mode=$(this).data("mode"); 
-            
-           if(confirm("Do you really want to change to multisharing?"))  
-           {  
-                $.ajax({  
-                     url:"deletetheitem.php",  
-                     method:"POST",  
-                     data:{
-                       multishareid:multishareid,
-                       mode:mode
-                      },  
-                     dataType:"text",  
-                     success:function(data){  
-                         alert(data);  
-                          fetch_data();  
-                     }  
-                });  
-           }  
-    });  
 
 
     
-      $(document).on('click', '#btn_copy', function(){  
-           var url= "#url"+$(this).data("urlid"); 
-           prompt("Your broadcast link is",""+$(url).attr("value")); 
-           fetch_data();
-      });  
-
-      
+   
       
     
      

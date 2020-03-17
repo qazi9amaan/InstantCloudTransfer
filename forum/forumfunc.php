@@ -99,6 +99,40 @@
 
 
 
+if(isset($_POST['deletepost'])){
+    $sql = "DELETE FROM forumposts WHERE id = '".$_POST["id"]."'";  
+    if(mysqli_query($conn, $sql))  
+    {  
+        echo 'Data Deleted';  
+    }  
+ };
+
+
+
+ if(isset($_POST['editpost'])){
+ 	$val = $_POST['value'];
+    $sql = "UPDATE forumposts SET description = '".$val."' WHERE id = '".$_POST["id"]."'";  
+    if(mysqli_query($conn, $sql))  
+    {  
+        echo 'Data Updated';  
+    }  
+ }
+
+
+
+
+ if(isset($_POST['updatethought'])){
+ 	
+ 	$val = $_POST['value'];
+    $sql = "UPDATE forumowner SET thought = '".$val."' WHERE id = '".$_POST["forum_id"]."'";  
+    if(mysqli_query($conn, $sql))  
+    {  
+        echo 'Data Updated';  
+    }  
+ }
+
+
+
 
 
 

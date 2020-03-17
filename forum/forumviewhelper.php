@@ -35,7 +35,7 @@
     <link rel="stylesheet" href="../fonts/pe-icon-7-stroke/css/pe-icon-7-stroke.css">
     <link href="http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Grand+Hotel' rel='stylesheet' type='text/css'>
-    <script src="..///ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+    <!-- <script src="../js/ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script> -->
      <link href="../css/ct-navbar.css" rel="stylesheet" /> 
      <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap" rel="stylesheet">
 
@@ -58,7 +58,7 @@
 <!-- JQuery -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <!-- Bootstrap tooltips -->
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+
 <!-- Bootstrap core JavaScript -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.min.js"></script>
 <!-- MDB core JavaScript -->
@@ -360,7 +360,43 @@ font-size: 32px;
      text-shadow: 0 0 3px #fff, 0 2px 12px #333;
 
 }
-  
+   .modal-header {
+      border-bottom: none;
+    }
+
+.modal-footer {   
+    border-top: none;
+}
+.modal{
+  color : #ffc300;
+}
+.modal-content{
+  background: #333;
+}
+.yellow:hover{
+  width: 25%;
+  background: #ffc300;
+  border-color: #ffc300;
+}
+.yellow{
+  width: 25%;
+  background: #333;
+  color: #ffc300;
+
+}
+
+.showurl{
+   background: #333;
+    color: #ffc300;
+  size: 25px;
+       height: 65px;
+    border: 1px solid #ffc300;
+    
+}
+
+
+
+
   </style>
   <body>
     
@@ -372,21 +408,21 @@ font-size: 32px;
    
 
 
-    <a class="navbar-brand " href="../home" data-forumname = " <?php echo $_GET['forum']; ?>" id= "forumname" > 
+    <a class="navbar-brand " href="forum-main.php" data-forumname = " <?php echo $_GET['forum']; ?>" id= "forumname" > 
     Forum @ <?php echo $_GET['forum']; ?> 
         </a>
  
 
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#sss"  aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
+  <button id = "navtoggler" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#sss"  aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
      
 
-  <div class="collapse navbar-end navbar-collapse" id="sss">
+  <div class="collapse navbar-end navbar-collapse" state = "closed" id="sss">
             <ul class="navbar-nav justify-content-center  mx-auto">
 
                          <li class="nav-item  ">
-                          <a href="forum-main.php" class="nav-link">
+                          <a href="../home" class="nav-link">
                                <i class="pe-7s-home"></i>
                                   <p>Home</p>
                           </a>
@@ -415,6 +451,13 @@ font-size: 32px;
                                     <p>Delete Forum</p>
                                         </a>
                       </li> 
+
+                       <li class="nav-item  ">
+                          <a href="#" id = "pinathought" data-forumid = "<?php echo $_GET['id']; ?>" class="nav-link">
+                              <i class="pe-7s-pin"></i>
+                                    <p>Pin Thought</p>
+                                        </a>
+                      </li> 
                       <?php
                         }
 
@@ -423,23 +466,13 @@ font-size: 32px;
                         if($_SESSION['broadcastchannel'] != $row['owner']){
 
                       ?>
-                        <li class="nav-item  ">
-                          <a href="forum-main.php" data-forumid = "<?php echo $_GET['id']; ?>" class="nav-link">
-                              <i class="pe-7s-trash"></i>
-                                    <p>Question</p>
-                                        </a>
-                      </li> 
+                       
 
                       <?php
                         }
 
                       ?>
-                       <li class="nav-item ">
-                          <a href="../logout.php?logout" class="nav-link">
-                               <i class="pe-7s-power"></i>
-                                  <p>Logout</p>
-                          </a>
-                    </li>     <?php
+                         <?php
                         }else{
 
                       ?>
@@ -471,7 +504,7 @@ font-size: 32px;
     <nav class="navbar navbar-expand-lg  navbar-dark navbar-ct-black   absolute-top">
       <div class="container">
      <?php if(isset( $_SESSION['broadcastchannel'])){ ?>
-        <a  data-user = "<?php echo $_SESSION['broadcastchannel']; ?>" class="navbar-brand check" href="#" id= "channelname" style="MAX-    MAX-WIDTH: 86px;
+        <a  data-user = "<?php echo $_SESSION['broadcastchannel']; ?>" class="navbar-brand check" href="../home" id= "channelname" style="MAX-    MAX-WIDTH: 86px;
           PADDING-LEFT: 7PX;
           font-size: 19px;
           font-weight: 400;
@@ -504,7 +537,29 @@ font-size: 32px;
  </div>
 </nav></div></div>
 
+ <!-- Modal -->
+  <div class="modal show" id="exampleModalCenter" tabindex="1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">What's on your mind?</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span style="color: #ffc300;" aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body p-5">
+         <textarea  style = "width: 100%;" class = "form-control lead showurl" id="uploadathoughtvalue" placeholder="Whats your thought?" ></textarea>
+        </div>
+        <div class="modal-footer" style="
+      margin-top: -27px;
+  ">
+          <button  type="button" class="btn btn-lg-dark" data-dismiss="modal">Close</button>
+          <button type="button"   id = "uploadathoughtbtn"class="btn btn-lg-dark"> Upload Now</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
 
 
@@ -585,9 +640,9 @@ font-size: 32px;
         </div>
           
         <div class="mb-5  card my-4">
-          <h5 class="card-header">Pin a Question?</h5>
+          <h5 class="card-header">Whats Happening?</h5>
           <div class="card-body">
-            <p class = "msg">You can put anything you want inside of these side widgets. They are easy to use, and feature the new Bootstrap 4 card containers!</p>
+            <p class = "msg" id = "showthought"></p>
           </div>
             
         </div>
@@ -623,8 +678,8 @@ font-size: 32px;
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ajax-bootstrap-select/1.4.5/js/ajax-bootstrap-select.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-
+  <!--   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+ -->
 
  <!-- Optional JavaScript -->
    <script>
@@ -636,10 +691,12 @@ font-size: 32px;
     }
 
   </script>
+
+
+
+
     <script>
-       $(document).ready(function(){
-          $('[data-toggle="tooltip"]').tooltip();   
-        });
+    
        $('#controller-b').on('click', function (e) {
         e.preventDefault()
          $("#controller-a").attr('class','nav-link ')
@@ -676,12 +733,7 @@ font-size: 32px;
 
 
     </script>
-    <script>
-       $(document).ready(function(){
-          $('[data-toggle="tooltip"]').tooltip();   
-        });
-
-    </script>
+    
 
   <!-- AJAX CODES -->
  <script>
@@ -693,6 +745,7 @@ font-size: 32px;
       
        fetch_data();
        fetch_topics();
+        fetch_thought();
        var showall =  setInterval(fetch_data,9000);
 
 
@@ -754,6 +807,23 @@ font-size: 32px;
     });
 
 
+
+           function fetch_thought()  
+      {  var forum_id = <?php echo $_GET["id"]; ?>;
+           $.ajax({  
+                url:"fetchallforumposts.php",  
+                method:"POST",
+                data:{
+                  showthoughts:true,
+                  forum_id:forum_id,
+                },
+                success:function(data){  
+                     $('#showthought').html(data);  
+                }  
+           }); 
+       } 
+
+
            function fetch_topics()  
       {  
            $.ajax({  
@@ -783,6 +853,7 @@ font-size: 32px;
                 success:function(data){  
                      $('#result').html(data); 
                      fetch_topics(); 
+
                 }  
            }); 
        } 
@@ -812,9 +883,95 @@ font-size: 32px;
 
 
 
- </script>
+ $(document).on('click', '#deletepostbtn', function(){  
+           var id=$(this).data("deletepostid"); 
+            
+           if(confirm("Are you sure you want to delete this?"))  
+           {  
+                $.ajax({  
+                     url:"forumfunc.php",  
+                     method:"POST",  
+                     data:{
+                      deletepost:true,
+                      id:id,
+                    },  
+                     dataType:"text",  
+                     success:function(data){  
+                          alert(data);  
+                          fetch_data();  
+                     }  
+                });  
+           }  
+    });  
+
+
+
+ $(document).on('click', '#editpostbtn', function(){  
+           var id=$(this).data("editpostid"); 
+           var desc=$(this).data("description"); 
+           
+            var value=prompt("Please enter your new description?",desc);
+           if( value )  
+           {  
+                $.ajax({  
+                     url:"forumfunc.php",  
+                     method:"POST",  
+                     data:{
+                      editpost:true,
+                      id:id,
+                      value:value,
+                    },  
+                     dataType:"text",  
+                     success:function(data){  
+                          alert(data);  
+                          fetch_data();  
+                     }  
+                });  
+           }  
+    });  
+
+
+ $(document).on('click', '#uploadathoughtbtn', function(){  
+          var forum_id = <?php echo $_GET["id"]; ?>;
+           var value=$('#uploadathoughtvalue').val(); 
+
+          $('#uploadathoughtbtn').attr('value','Please wait!'); 
+           
+           
+             $.ajax({  
+                     url:"forumfunc.php",  
+                     method:"POST",  
+                     data:{
+                      updatethought:true,
+                      forum_id:forum_id,
+                      value:value,
+                    },  
+                     dataType:"text",  
+                     success:function(data){  
+                          fetch_thought(); 
+                          $('#exampleModalCenter').modal('hide');
+                     }  
+                });  
+            
+    });  
+
 
  
+
+
+
+
+
+
+ </script>
+ <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+ <script>
+   
+   $(document).on('click', '#pinathought', function(){  
+         $('#exampleModalCenter').modal('show')
+
+    }); 
+ </script>
   
   </body>
 </html>

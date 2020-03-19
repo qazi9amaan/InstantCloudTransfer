@@ -157,7 +157,7 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6, p, .navbar, .brand {
     <div id="navbar">
     <nav class="navbar navbar-expand-lg  navbar-dark navbar-ct-black   fixed-top">
       <div class="container">
-  <a class="navbar-brand check" href="" style="
+  <a class="navbar-brand check" href="../home" style="
     font-size: 25px;
     font-weight: 400;
 ">CREATE A FORUM</a>
@@ -184,9 +184,9 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6, p, .navbar, .brand {
                       
                      
                      <li class="nav-item ">
-                          <a href="broadcast.php" class="nav-link">
+                          <a href="forum-main.php" class="nav-link">
                                <i class="pe-7s-users"></i>
-                                <p>Forum</p> 
+                                <p>My Forum</p> 
                           </a>
                       </li> 
                      

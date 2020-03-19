@@ -1,7 +1,10 @@
 
 <?php
 
-    $conn = mysqli_connect('localhost', 'root', '' ,'instantsharing');
+
+    include('../connection.php');
+
+   
 
      session_start();
 
@@ -37,7 +40,7 @@
                         </div> 
                         <div class="card-body">
                             <p  class="lead card-text y-overflow-hidden ">'.$row['description'].' </p>
-                          <a href="downloadfielhelper.php?file='.$row['filename'].'" class="btn  peach-gradient float-right ">  Download </a>';
+                          <a id = "downloadbtn" href="downloadfielhelper.php?file='.$row['filename'].'" class="btn  peach-gradient float-right ">  Download </a>';
 
                          
                           

@@ -1,14 +1,6 @@
-<?php
-   
-session_start();
- if(isset($_SESSION['status']))
-  {
-        header("location:account.php");
-  }
-  
-
-  
-?>
+<?php 
+  session_start();
+ ?>
 
 <!doctype html>
 <html lang="en">
@@ -27,18 +19,29 @@ session_start();
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
      <link href="css/ct-navbar.css" rel="stylesheet" />  
     <title>Kirangle | Cloud Share</title>
+
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+<!-- Google Fonts -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+<!-- Bootstrap core CSS -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+<!-- Material Design Bootstrap -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.14.1/css/mdb.min.css" rel="stylesheet">
   </head>
 
   <style>
      body{
         background: #373737
       }
+
+     
     .login-form-2{
-      height: 430px;
+      height: 455px;
      
       padding: 5%;
-      background:#2d2d2d ;
-      box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
+      /*  */
+      /* box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19); */
 }
 .login-form-2 .display-3{
     
@@ -84,7 +87,7 @@ session_start();
     }
   
   .login-container{
-    margin-top: 9.5rem;
+    margin-top: 5.0rem;
     
   }
   .info{
@@ -198,6 +201,22 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6, p, .navbar, .brand {
     -webkit-font-smoothing: antialiased;
 }
 
+.mt-6{
+  margin-top: 2.5rem;
+}
+
+
+.card:hover{
+  background: #373737;
+  color: #333;
+}
+ .card{
+        background:#2d2d2d ;
+      }
+
+
+
+
 
 
   </style>
@@ -242,7 +261,7 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6, p, .navbar, .brand {
   <a class="navbar-brand check" href="index.php" style="
     font-size: 25px;
     font-weight: 400;
-">KIRANGLE ZONE</a>
+">KIRANGLE ZONE </a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" >
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -250,78 +269,213 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6, p, .navbar, .brand {
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav  ml-auto">
-                    
-                    <li class="nav-item ">
-                          <a href="broadcast.php" class="nav-link">
-                               <i class="pe-7s-cloud-upload"></i>
-                                <p>Broadcast</p> 
-                          </a>
-                      </li> 
-                       <li class="nav-item">
-                          <a href="download.php" class="nav-link">
-                               <i class="pe-7s-cloud-download"></i>
-                                <p>Download</p>
-                          </a>
-                      </li> 
+
+
+                <?php 
+
+                         if(isset($_SESSION['status'])){
+                      ?>
                       <li class="nav-item">
-                          <a href="delete.php" class="nav-link">
-                              <i class="pe-7s-trash">
-                                              </i>
-                              <p>Delete</p>
-                          </a>
-                      </li> 
-                      <li class="nav-item ">
-                          <a href="shortner.php" class="nav-link">
-                               <i style = "color: #ffc300;" class="pe-7s-scissors"></i>
-                                  <p>Shorten URl</p>
+                          <a href="account.php" class="nav-link">
+                               <i class="pe-7s-user"></i>
+                                  <p>Account</p>
                           </a>
                     </li>   
+                      <li class="nav-item ">
+                          <a href="logout.php?logout" class="nav-link">
+                               <i class="pe-7s-power"></i>
+                                  <p>Logout</p>
+                          </a>
+                    </li>   
+                    <?php 
+                      }
+                      else{
+                    ?>   
+                         
+                    <li class="nav-item ">
+                          <a href="newaccount.php" class="nav-link">
+                               <i class="pe-7s-add-user"></i>
+                                  <p>Register</p>
+                          </a>
+                    </li>   
+                  
                     <li class="nav-item ">
                           <a href="login.php" class="nav-link">
                                <i class="pe-7s-user"></i>
                                   <p>Login</p>
                           </a>
-                    </li>   
+                    </li> 
+                    <?php
+                      }
+                    ?>
+
+
+
+                       
                </ul>
   </div></div>
 </nav></div></div>
 
 
 
- <div class="container login-container">
-            <div class="row">
-               <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 login-form-1">
-                  <div class="info">
-                    <h1 class="display-4">INSTANT CLOUD SHARE</h1>
-                   <br>
-                    <p class="lead">
- Share your files any where anytime, just make a channel and start sharing. Use your room number and channel name or just the url provided after broadcast to download you can register here to keep a eye on your broadcasts. </p>
-  <p class="lead"><strong> Donot share your authentication code with annyone. </strong> 
-  Your authentication code is the access key to your channel. </p>
 
-                  </div>
-                </div>
-                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 login-form-2">
-                <h1 class="display-3">CREATE YOUR CHANNEL</h1>
-                    
-                    <form action="authentication.php"  method="post">
-                        <div class="form-group">
-                            <input type="text" name = "broadcastchannel" class="form-control" placeholder="Channal Name *" value="" />
-                        </div>
-                        <div class="form-group">
-                            <input type="password" name = "authcode" class="form-control" placeholder="Authentication code *" value="" />
-                        </div>
-                        <div class="form-group">
-                            <input type="submit" name = "create_account"class="btnSubmit" value="Create" />
-                        </div>
-                        
-                    </form>
-                </div>
-            </div>
-        </div></div>
+ <div class="container login-container ">
+            <div class="row "><br><br>
+            <div class="card-columns">
 
+ 
+
+
+ <div class="card">
+     <i style = "font-size: 95px;" class="pe-7s-cloud-upload card-img-top lead text-center pt-3"></i>
+    <div class="card-body">
+      <h5 class="card-title lead text-center text-uppercase">Broadcast Now</h5>
+      <a disabled href="broadcast.php" class=" stretched-link "></a>
 
       
+    </div>
+  </div>
+
+ 
+
+<div class="card">
+     <i style = "font-size: 95px;" class="pe-7s-cloud-download card-img-top lead text-center pt-3"></i>
+    <div class="card-body">
+      <h5 class="card-title lead text-center text-uppercase">Download </h5>
+      <a disabled href="download.php" class=" stretched-link "></a>
+      
+    </div>
+  </div>
+
+
+  <div class="card">
+     <i style = "font-size: 95px;" class="pe-7s-trash card-img-top lead text-center pt-3"></i>
+    <div class="card-body">
+      <h5 class="card-title lead text-center text-uppercase">Delete </h5>
+      <a disabled href="delete.php" class=" stretched-link "></a>
+      
+    </div>
+  </div>
+
+  
+
+  <div class="card">
+     <i style = "font-size: 95px;" class="pe-7s-next-2 card-img-top lead text-center pt-3"></i>
+    <div class="card-body">
+      <h5 class="card-title lead text-center text-uppercase">TEXT SHARING</h5>
+      <a disabled href="textsharing.php" class=" stretched-link "></a>
+      
+    </div>
+  </div>
+
+  <div class="card">
+     <i style = "font-size: 95px;" class="pe-7s-scissors card-img-top lead text-center pt-3"></i>
+    <div class="card-body">
+      <h5 class="card-title lead text-center text-uppercase">URL SHORTNER</h5>
+      <a disabled href="shortner.php" class=" stretched-link "></a>
+      
+    </div>
+  </div>
+  
+
+ <div class="card">
+     <i style = "font-size: 95px;" class="pe-7s-help1 card-img-top lead text-center pt-3"></i>
+    <div class="card-body">
+      <h5 class="card-title lead text-center text-uppercase">Help</h5>
+      <a disabled href="help.php" class=" stretched-link "></a>
+      
+    </div>
+  </div>
+    <div class="card">
+     <i style = "font-size: 95px;" class="pe-7s-users card-img-top lead text-center pt-3"></i>
+    <div class="card-body">
+      <h5 class="card-title lead text-center text-uppercase">Forums</h5>
+      <a disabled href="viewforums.php" class=" stretched-link "></a>
+      
+    </div>
+  </div>
+
+    <?php 
+
+                         if(isset($_SESSION['status'])){
+                      ?>
+
+
+
+
+                       <div class="card">
+                         <i style = "font-size: 95px;" class="pe-7s-user card-img-top lead text-center pt-3"></i>
+                        <div class="card-body">
+                          <h5 class="card-title lead text-center text-uppercase">Account</h5>
+                          <a disabled href="account.php" class=" stretched-link "></a>
+                          
+                        </div>
+                      </div>
+
+
+                   <div class="card">
+                         <i style = "font-size: 95px;" class="pe-7s-power card-img-top lead text-center pt-3"></i>
+                        <div class="card-body">
+                          <h5 class="card-title lead text-center text-uppercase">Logout</h5>
+                          <a disabled href="logout.php?logout" class=" stretched-link "></a>
+                          
+                        </div>
+                      </div>
+
+
+
+
+
+                  
+                    <?php 
+                      }
+                      else{
+                    ?>   
+                      <div class="card">
+                         <i style = "font-size: 95px;" class="pe-7s-user card-img-top lead text-center pt-3"></i>
+                        <div class="card-body">
+                          <h5 class="card-title lead text-center text-uppercase">Login</h5>
+                          <a disabled href="login.php" class=" stretched-link "></a>
+                          
+                        </div>
+                      </div>
+
+
+                    <div class="card">
+                        <div class="card-body">
+                          <i style = "font-size: 75px;" class="pe-7s-info card-img-top lead text-center pt-2 pb-3"></i>
+                          <p class="card-text">
+                            You can't broadcast from any channel name, to own a channel please register.
+                          </p>
+                        </div>
+                      </div>
+                    <?php
+                      }
+                    ?>
+
+ 
+
+ 
+</div>
+
+          
+        </div>
+      </div>
+<br>
+   <!-- Footer -->
+<footer class="page-footer font-small pt-4 bottom ">
+
+ 
+  <!-- Footer Elements -->
+
+  <!-- Copyright -->
+  <div class="footer-copyright  text-center py-3">© 2020 Copyright:
+    <a href="https://kirangle.com/"> Kirangle.com</a>
+  </div>
+  <!-- Copyright -->
+
+</footer>
+<!-- Footer -->
 
 
 
@@ -343,8 +497,12 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6, p, .navbar, .brand {
   </script>
 
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<!-- Bootstrap tooltips -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+<!-- Bootstrap core JavaScript -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<!-- MDB core JavaScript -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.14.1/js/mdb.min.js"></script>
   </body>
 </html>

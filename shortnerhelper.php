@@ -5,8 +5,8 @@
 	$password = "";
 	$db ="urlshortner";
 	$siteurl = 'localhost/test2';
-	$conn = mysqli_connect($servername, $username, $password,$db);
-	if (!$conn) {
+	$conn1 = mysqli_connect($servername, $username, $password,$db);
+	if (!$conn1) {
     die("Connection failed: " . mysqli_connect_error());
 }
 	
@@ -23,7 +23,7 @@
     	return $randomString;
 	}
 
-	function israndomindb($value ,$conn)
+	function israndomindb($value ,$conn1)
 	{
 		$sql = "SELECT id FROM urlhandler WHERE shortkey =".$value;
 		$result = mysqli_query($conn, $sql);
@@ -33,17 +33,17 @@
 		return 0;
 	}
 
-	function shortentheurl($word,$url,$conn){
+	function shortentheurl($word,$url,$conn1){
 		if (substr($url, 0, 4) != "http") {
       		$url = "http://".$url;
     	} 
 		$sql = "INSERT INTO urlhandler (shortkey, redirectto)
 		VALUES ('$word', '$url')";
 
-		if (mysqli_query($conn, $sql)) {
+		if (mysqli_query($conn1, $sql)) {
 			echo 'done';
 		} else {
-		    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+		    echo "Error: " . $sql . "<br>" . mysqli_error($conn1);
 		}
 	}
  
@@ -61,11 +61,11 @@
     	}else{
     		$word = getRandomword(6);
     		$url = $_POST['requested'];
-    		while(!israndomindb($word,$conn))
+    		while(!israndomindb($word,$conn1))
     		{
     			$word = getRandomword(6);
     		}
-			shortentheurl($word,$url,$conn);
+			shortentheurl($word,$url,$conn1);
 			$msg = $siteurl."/".$word;
 		    showtoast($msg);
     		

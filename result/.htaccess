@@ -1,0 +1,25 @@
+
+Options +FollowSymLinks
+RewriteEngine On
+ 
+RewriteCond %{SCRIPT_FILENAME} !-d
+RewriteCond %{SCRIPT_FILENAME}.php -f
+
+RewriteRule ^shortner shortner.php
+
+RewriteRule ^home index.php
+RewriteRule ^404 404.php
+RewriteRule ^login login.php
+RewriteRule ^create shortnerhelper.php
+RewriteRule ^thankyou$ thankyou.php
+
+
+RewriteRule ^thankyou/([0-9]+)/([0-9a-zA-Z-_]+)$ thankyou.php?bid=$1&id=$2
+
+RewriteRule ^broadcast$ broadcast.php
+
+RewriteRule ^(\w+)$ ./shortner.php?title=$1
+
+ 
+ 
+

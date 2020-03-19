@@ -10,7 +10,8 @@
      $siteurl = 'localhost/test2';
      
 
-     $conn = mysqli_connect('localhost', 'root', '','instantsharing');
+     
+    include('../connection.php');
 
 
 

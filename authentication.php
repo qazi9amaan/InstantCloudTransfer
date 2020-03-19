@@ -1,11 +1,13 @@
 <?php
+		
+		include('connection.php');
 
 		session_start();
 
 		if(isset($_POST['login']))
 	    {
 			//$_SESSION['status']='active';
-			$conn = mysqli_connect('localhost', 'root', '','instantsharing');
+			
 	       if(empty($_POST['broadcastchannel']) || empty($_POST['authcode']))
 	       {
 	            header("location:404");
@@ -29,10 +31,10 @@
 	       }
 	    }
 		
-		function presentindb($channel){
+		function presentindb($channel,$conn){
 			//if present in users show taken
 			
-			  $conn = mysqli_connect('localhost', 'root', '','instantsharing');
+			  // $conn = mysqli_connect('localhost', 'root', '','instantsharing');
 			  $sql = "SELECT * FROM users WHERE channelname = '$channel'";
 				 $result = mysqli_query($conn, $sql);
 				   if (mysqli_num_rows($result) == 0) { 
@@ -44,10 +46,10 @@
 			
 		  }
 
-		function create_account($channelname,$auth)
+		function create_account($channelname,$auth,$conn)
 		{
 			
-			$conn = mysqli_connect('localhost', 'root', '','instantsharing');
+			// $conn = mysqli_connect('localhost', 'root', '','instantsharing');
 			$sql = "INSERT INTO users (channelname,auth)
 			  VALUES ('$channelname', '$auth')";
 		  
@@ -71,11 +73,11 @@
 			   
 				   $channelname = $_POST['broadcastchannel'];
 				   $auth = $_POST['authcode'];
-				   if(presentindb($channelname))
+				   if(presentindb($channelname,$conn))
 				   {
 					   exit();
 				   }
-	            if(create_account($channelname,$auth))
+	            if(create_account($channelname,$auth,$conn))
 	            {
 	                $_SESSION['broadcastchannel']=$_POST['broadcastchannel'];
 	                $_SESSION['status']='active';

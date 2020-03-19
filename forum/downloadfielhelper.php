@@ -9,13 +9,16 @@
           {
             
           
-           $file = ("../result/$filename");
+          $_SESSION['downloadavailable']=1;
+          $file = ("result/$filename");
            $filetype=filetype($file);
-           $filename=basename($file);
-           header ("Content-Type: ".$filetype);
-           header ("Content-Length: ".filesize($file));
-           header ("Content-Disposition: attachment; filename=".$filename);
-           readfile($file);
+
+          
+           $filenamefinal=basename($file);
+           echo  $filenamefinal;
+           sleep(3);
+
+           header("Location:../ty.php?file=".$filenamefinal);
 
 
            

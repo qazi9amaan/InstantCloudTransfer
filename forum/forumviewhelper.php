@@ -1,7 +1,8 @@
 
 <?php
    session_start();
-  $conn = mysqli_connect('localhost', 'root', '' ,'instantsharing');
+  
+    include('../connection.php');
 
 ?>
 
@@ -958,6 +959,13 @@ font-size: 32px;
 
  
 
+
+          $(document).on('click', '#downloadbtn', function(){  
+            
+              $("#downloadbtn").attr("value", "Generating ...");
+             
+            
+    });  
 
 
 

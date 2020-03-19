@@ -282,7 +282,18 @@ font-size: 32px;
     OVERFLOW-X: HIDDEN;"> 
     <?php echo $_SESSION['broadcastchannel']; ?>
       
-    </a></div>
+    </a>   <ul class="navbar-nav  ml-auto">
+                    
+                     <li class="nav-item ">
+                          <a href="../account.php" class="nav-link">
+                               <i class="pe-7s-home"></i>
+                                  
+                          </a>
+                    </li>  </ul>
+
+
+
+  </div>
 
     <form class="navbar-form mr-4 mt-0 mb-0 my-auto d-flex justify-content-center w-72" role="search">
             <div class="input-group">
@@ -305,13 +316,12 @@ font-size: 32px;
 
   <div class="collapse navbar-end navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav  ml-auto">
-                    
                    
                      
-                       <li class="nav-item active ">
-                          <a href="account.php" class="nav-link">
-                               <i class="pe-7s-user"></i>
-                                  <p>Account</p>
+                       <li class="nav-item  ">
+                          <a href="" class="nav-link">
+                               <i class="pe-7s-users"></i>
+                                  <p>Forums</p>
                           </a>
                     </li>  
                     <li class="nav-item  ">

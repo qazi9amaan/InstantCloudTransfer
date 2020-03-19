@@ -1,46 +1,49 @@
 <?php
+  session_start();
 
-function deletetheurl($id)
+ include('connection.php');
+
+
+function deletetheurl()
 {
-  $conn = mysqli_connect('localhost', 'root', '','urlshortner');
+  $id = $_POST['id'];
+  $conn1 = mysqli_connect('localhost', 'root', '','urlshortner');
   $sql = "DELETE FROM urlhandler  WHERE shortkey= '$id'";
  
-  if (!mysqli_query($conn, $sql)) {
-    header('Location:404');
+  if (!mysqli_query($conn1, $sql)) {
+     echo mysqli_error($conn);
   }
 
 }
-function delete_file($bid ,$filename)
+function delete_file($bid ,$conn)
 {
-  $conn = mysqli_connect('localhost', 'root', '','instantsharing');
-  $sql = "DELETE FROM storage  WHERE bid= '$bid' and sharingmode = 'single'";
+  // $conn = mysqli_connect('localhost', 'root', '','instantsharing');
+  $sql = "DELETE FROM storage  WHERE  sharingmode = 'single' and bid = '$bid' ";
  
      if (mysqli_query($conn, $sql)) {
-       //deleting tinyurl
+          deletetheurl();
    
      }
      else{
-      header('Location:404');
+     echo mysqli_error($conn);
      }
 }
 
-function increasedownloadcount($bid)
+function increasedownloadcount($bid,$conn)
 {
 
-  $conn = mysqli_connect('localhost', 'root', '','instantsharing');
+  // $conn = mysqli_connect('localhost', 'root', '','instantsharing');
   $sql = "UPDATE storage  SET downloadcount = downloadcount +1 WHERE bid= '$bid'";
    if (mysqli_query($conn, $sql)) {
- 
-      delete_file($bid ,$filename,$id);
  
   }else{
     echo "updation error".mysqli_error($conn);
   }
 }
 
-function getFilename($bid)
+function getFilename($bid,$conn)
 {
-  $conn = mysqli_connect('localhost', 'root', '','instantsharing');
+  // $conn = mysqli_connect('localhost', 'root', '','instantsharing');
   $sql = "SELECT filename FROM storage WHERE bid= '$bid'";
  
  $filename =  null;
@@ -61,35 +64,45 @@ function getFilename($bid)
      
     if(!empty($_POST['bid']))
     { 
-      $conn = mysqli_connect('localhost', 'root', '','instantsharing');
-      $filename = getFilename($_POST['bid']);
+     
+      $filename = getFilename($_POST['bid'],$conn);
       $files = scandir("result");
    
       for($a=1;$a<count($files);$a++)
       {
           if($files[$a] ===  $filename )
           {
-            
-          increasedownloadcount($_POST['bid']);     
-          deletetheurl($_POST['id']);
-           $file = ("result/$filename");
+
+            $_SESSION['downloadavailable']=1;
+          increasedownloadcount($_POST['bid'],$conn);
+              
+          delete_file($_POST['bid'],$conn);
+          
+          $file = ("result/$filename");
            $filetype=filetype($file);
-           $filename=basename($file);
-           header ("Content-Type: ".$filetype);
-           header ("Content-Length: ".filesize($file));
-           header ("Content-Disposition: attachment; filename=".$filename);
-           readfile($file);
-
-
            
+          
+           $filenamefinal=basename($file);
+          
+           sleep(3);
+
+           header("Location:ty.php?file=".$filenamefinal);
+         
+
+
+          
+
+
+  
+ 
+
+         
           }
       }
       
       
           }
-        }
-  
-
+     }
 ?>
 
 <!doctype html>
@@ -357,26 +370,29 @@ a {
   background: #333;
   color: #ffc300;
 }
+
+.align-middle{
+  margin-top: -45px;
+}
+
   </style>
   <body>
 
-   
-
-  
-
-
-<div class='tile' id='a'>
+   <div class='tile' id='a'>
 <br><br>
 <div class="align-middle  ">
   <div class="text-center">
     <h1 center class = "display-2"> Thankyou! </h1>
-      <h1 style = "text-align: center"class = "display-5"> Your download link is ready! </h1>
+      <h1 style = "text-align: center"class = "display-5"> Please generate your download link! </h1>
       <p style = "text-align: center"class="lead">We hope that you loved your services, see you soon!</p>
       <form action="/test2/thankyou.php" method="POST">
       <input hidden type="text" name ='bid' value=" <?php echo $_GET['bid']; ?>">
       <input hidden type="text" name ='id' value=" <?php echo $_GET['id']; ?>">
-      <input type="submit" class="btn btn-default yellow" name = "download_link" value="Download">
+      <input  id = "generatingbtn" type="submit" class="btn btn-default yellow" name = "download_link" value="Generate">
       </form>
+       
+      
+    
   </div>
 </div>
  
@@ -393,12 +409,25 @@ a {
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-      <script src="js/main.js"></script>
-      
+  
       <script>
        
-        
+       
+
+
+
+
+          $(document).on('click', '#generatingbtn', function(){  
+            
+              $("#generatingbtn").attr("value", "Generating ...");
+             
+            
+    });  
+
 </script>
+
+
+
 
 
  

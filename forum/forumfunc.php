@@ -1,6 +1,7 @@
 <?php
 		
-	$conn = mysqli_connect('localhost', 'root', '' ,'instantsharing');
+
+    include('../connection.php');
 
  if(isset($_GET["deleteforum"]) && isset($_GET["forum"])){
 		$user = $_GET['forum'];

@@ -328,7 +328,7 @@
                  <div class="wrapper">
                   <form action="func.php" enctype="multipart/form-data" method="post">
                     <div class="file-upload">
-                      <input name="upload[]" type="file" multiple="multiple" class="upload up" id="up"  />
+                      <input name="upload[]" type="file" multiple class="upload up" id="up"  />
                       <span id = "check">
                          <i class="fa fa-arrow-up"></i>
                       </span>
@@ -355,8 +355,9 @@
                     ?>   
 
                     <div class="form-group">
-                            <input type="text" required name = "broadcastchannel" class="form-control" placeholder="Channel Name *" value="" />
+                            <input type="text" required  id = "newbroadcastname"  name = "broadcastchannel" class="form-control" placeholder="Channel Name *" value="" />
                         </div>
+                        
                         
                         <?php
                       }
@@ -376,8 +377,9 @@
                                                 </select>
                                               </div>
                         </div>
-                        <div class="form-group">
-                            <input name = "broadcast" type="submit" class="btnSubmit" value="Broadcast now" />
+                        
+                        <div  id = "renamestatus" class="form-group">
+                          <input name = "broadcast" type="submit" class="btnSubmit" id = "broadcastnowbtnn"  value=" Broadcast now" />
                         </div>
                         
                     </form>
@@ -438,12 +440,16 @@
 
 
 
-
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  
+ <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-  
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ajax-bootstrap-select/1.4.5/js/ajax-bootstrap-select.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+ <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> -->
   
     <?php if(isset($_GET['m']))
 {
@@ -453,6 +459,34 @@
   }
 }
  ?>
+
+
+
+
+ <script>
+   
+
+    $(document).ready(function(){
+     
+         $('#newbroadcastname').keyup(function(){
+           
+                jQuery.ajax({
+                  url:"func.php",
+                  type:"POST",
+                   data: {
+                    checkchannelname:true,
+                        channelname : $('#newbroadcastname').val(),
+                        
+                      },
+                    success:function(data){  
+                        $('#renamestatus').html(data);
+                        }  
+                });
+
+       });
+      
+    });
+ </script>
  
   </body>
 </html>

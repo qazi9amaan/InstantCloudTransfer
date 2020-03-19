@@ -1,5 +1,5 @@
 <?php
-    $conn = mysqli_connect('localhost', 'root', '' ,'instantsharing');
+    include('connection.php');
 
     if(isset($_GET['search']))
     {

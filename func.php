@@ -1,14 +1,50 @@
 <?php
  session_start();
-  require_once('connection.php');
+ include('connection.php');
   include('shortnerhelper.php');
   $siteurl = 'localhost/test2';
-  $conn = mysqli_connect('localhost', 'root', '','instantsharing');
 
 
-function getFilename($broadcastchannel ,$roomnumber)
+ 
+
+if(isset($_POST['checkchannelname'])){
+
+
+    $channel = $_POST['channelname'];
+    
+    $sql = "SELECT channelname FROM users WHERE channelname= '$channel'";
+      if($result = mysqli_query($conn, $sql)){
+           if(mysqli_num_rows($result) > 0){                
+        
+echo "
+              
+                $('#broadcastnowbtnn').prop('disabled', true);
+             
+
+          ";   
+
+          }else{
+             echo "
+              
+                $('#broadcastnowbtnn').prop('disabled', false);
+             
+
+          ";   
+          }
+      }
+  };
+
+
+
+
+
+
+
+
+
+function getFilename($broadcastchannel ,$roomnumber,$conn)
 {
-  $conn = mysqli_connect('localhost', 'root', '','instantsharing');
+  // $conn = mysqli_connect('localhost', 'root', '','instantsharing');
  $sql = "SELECT filename FROM storage WHERE broadcastchannel= '$broadcastchannel' and roomnumber = '$roomnumber'";
  
  $filename =  null;
@@ -26,11 +62,11 @@ function getFilename($broadcastchannel ,$roomnumber)
 }
 
 
-function delete_file($broadcastchannel ,$roomnumber)
+function delete_file($broadcastchannel ,$roomnumber,$conn)
 {
 
   
-    $conn = mysqli_connect('localhost', 'root', '','instantsharing');
+    // $conn = mysqli_connect('localhost', 'root', '','instantsharing');
     $sql = "DELETE FROM storage  WHERE broadcastchannel= '$broadcastchannel' and roomnumber = '$roomnumber' and  sharingmode = 'single' ";
       if (!mysqli_query($conn, $sql)) {
           echo "deletion error".mysqli_error($conn);
@@ -39,15 +75,15 @@ function delete_file($broadcastchannel ,$roomnumber)
 }
 
 
-function increasedownloadcount($filename,$broadcastchannel ,$roomnumber)
+function increasedownloadcount($filename,$broadcastchannel ,$roomnumber,$conn)
 {
 
-  $conn = mysqli_connect('localhost', 'root', '','instantsharing');
+  // $conn = mysqli_connect('localhost', 'root', '','instantsharing');
   $sql = "UPDATE storage  SET downloadcount = downloadcount +1 WHERE broadcastchannel= '$broadcastchannel' and roomnumber = '$roomnumber' and filename = '$filename'";
    if (mysqli_query($conn, $sql)) {
 
   
-      delete_file($broadcastchannel ,$roomnumber);
+      delete_file($broadcastchannel ,$roomnumber,$conn);
  
   }else{
     echo "updation error".mysqli_error($conn);
@@ -80,9 +116,9 @@ function increasedownloadcount($filename,$broadcastchannel ,$roomnumber)
 //       }
 // }
 
-function uploadlinktodb($broadcastchannel ,$roomnumber,$msg)
+function uploadlinktodb($broadcastchannel ,$roomnumber,$msg,$conn)
 {
-  $conn = mysqli_connect('localhost', 'root', '','instantsharing');
+  // $conn = mysqli_connect('localhost', 'root', '','instantsharing');
   $sql = "UPDATE storage  SET url = '$msg' WHERE broadcastchannel= '$broadcastchannel' and roomnumber = '$roomnumber'";
    if (mysqli_query($conn, $sql)) {
  
@@ -94,6 +130,12 @@ function uploadlinktodb($broadcastchannel ,$roomnumber,$msg)
 function getshareablelink($filename,$broadcastchannel ,$roomnumber,$siteurl,$conn)
 {
      
+
+     $shortencon = mysqli_connect('localhost', 'root', '','urlshortner');
+
+
+
+
      $sql = "SELECT * FROM storage WHERE broadcastchannel= '$broadcastchannel' and roomnumber = '$roomnumber' and filename = '$filename'";
   
         $result = mysqli_query($conn, $sql);
@@ -106,7 +148,7 @@ function getshareablelink($filename,$broadcastchannel ,$roomnumber,$siteurl,$con
                 echo $broadcastid;
                 $url = 'localhost/test2/thankyou/'.$broadcastid;
 
-                $shortencon = mysqli_connect('localhost', 'root', '','urlshortner');
+                
                 $word = getRandomword(6);
                 while(!israndomindb($word,$shortencon))
                 {
@@ -116,7 +158,7 @@ function getshareablelink($filename,$broadcastchannel ,$roomnumber,$siteurl,$con
                 $url = 'localhost/test2/thankyou/'.$broadcastid.'/'.$word;
                 shortentheurl($word,$url,$shortencon);
                 $msg = $siteurl."/".$word;
-                uploadlinktodb($broadcastchannel ,$roomnumber,$msg);
+                uploadlinktodb($broadcastchannel ,$roomnumber,$msg,$conn);
                 header('Location:broadcast?m='.$msg);
               }
               
@@ -125,13 +167,13 @@ function getshareablelink($filename,$broadcastchannel ,$roomnumber,$siteurl,$con
 
 
 
-function savetodb($filename, $broadcastchannel ,$roomnumber,$sharingmode)
+function savetodb($filename, $broadcastchannel ,$roomnumber,$sharingmode,$conn)
 {
   if(isset($_SESSION['status'])){
     $broadcastchannel =  $_SESSION['broadcastchannel'];
   }
   $dt=date("Y-m-d H:i:s");
-  $conn = mysqli_connect('localhost', 'root', '','instantsharing');
+  // $conn = mysqli_connect('localhost', 'root', '','instantsharing');
   $sql = "INSERT INTO storage (filename, broadcastchannel,roomnumber,sharingmode,uploaddate)
     VALUES ('$filename', '$broadcastchannel','$roomnumber', '$sharingmode','$dt')";
 
@@ -142,9 +184,9 @@ function savetodb($filename, $broadcastchannel ,$roomnumber,$sharingmode)
     }
 }
 
-function isregistered($channel)
+function isregistered($channel,$conn)
 {
-  $conn = mysqli_connect('localhost', 'root', '' ,'instantsharing');
+  // $conn = mysqli_connect('localhost', 'root', '' ,'instantsharing');
     $sql = "SELECT * FROM users WHERE channelname= '$channel' ";
        $result = mysqli_query($conn, $sql);
          if (mysqli_num_rows($result) == 0) { 
@@ -154,10 +196,10 @@ function isregistered($channel)
           }     
 }
 
-function presentindb($channel,$room){
+function presentindb($channel,$room,$conn){
   //if present in users show taken
     
-    $conn = mysqli_connect('localhost', 'root', '','instantsharing');
+    // $conn = mysqli_connect('localhost', 'root', '','instantsharing');
     $sql = "SELECT * FROM storage WHERE broadcastchannel= '$channel' and roomnumber = '$room'";
        $result = mysqli_query($conn, $sql);
          if (mysqli_num_rows($result) == 0) { 
@@ -172,7 +214,7 @@ function presentindb($channel,$room){
 // BROADCASTING CONTENT
   if(isset($_POST['broadcast']))
   { 
-    $broadcastchannel =  $_POST['broadcast'];
+    $broadcastchannel =  $_POST['broadcastchannel'];
     
     if(isset($_SESSION['status'])){
       $broadcastchannel =  $_SESSION['broadcastchannel'];
@@ -181,14 +223,14 @@ function presentindb($channel,$room){
     if(!empty($broadcastchannel) && !empty($_POST['roomnumber']))
     {
 
-      if(!isset($_SESSION['status']) && isregistered($broadcastchannel))
+      if(!isset($_SESSION['status']) && isregistered($broadcastchannel,$conn))
       {
         header('Location:login');
         exit();
       }
 
       //check if the same name is present in db
-      if(presentindb($broadcastchannel,$_POST['roomnumber']))
+      if(presentindb($broadcastchannel,$_POST['roomnumber'],$conn))
       {
           exit();
       }
@@ -219,15 +261,15 @@ function presentindb($channel,$room){
                     $zip->addFile('uploads/'.$filename); 
                 }
                 $zip->close();
-                savetodb($file_name_zip ,$broadcastchannel,$_POST['roomnumber'],$_POST['sharingmode']);
-                getshareablelink($filename ,$broadcastchannel,$_POST['roomnumber'],$siteurl,$conn);
+                savetodb($file_name_zip ,$broadcastchannel,$_POST['roomnumber'],$_POST['sharingmode'],$conn);
+                getshareablelink($file_name_zip ,$broadcastchannel,$_POST['roomnumber'],$siteurl,$conn);
           }
           else{
                     $files = $_FILES['upload'];
                     $tmp = $files['tmp_name'][0];
                     $filename = $files['name'][0];
                     move_uploaded_file($tmp, 'result/'.$filename);
-                    savetodb($filename ,$broadcastchannel,$_POST['roomnumber'],$_POST['sharingmode']);
+                    savetodb($filename ,$broadcastchannel,$_POST['roomnumber'],$_POST['sharingmode'],$conn);
                     getshareablelink($filename ,$broadcastchannel,$_POST['roomnumber'],$siteurl,$conn);
           }
         }else{
@@ -262,7 +304,7 @@ if(isset($_POST['download'])){
       if(!empty($_POST['downloadbroadcastchannel']) && !empty($_POST['roomnumber']))
     {    
 
-      $filename = getFilename($_POST['downloadbroadcastchannel'],$_POST['roomnumber']);
+      $filename = getFilename($_POST['downloadbroadcastchannel'],$_POST['roomnumber'],$conn);
       
       if(empty($filename))
       {
@@ -275,15 +317,26 @@ if(isset($_POST['download'])){
           if($files[$a] ===  $filename )
           {
             
-           increasedownloadcount($filename,$_POST['downloadbroadcastchannel'],$_POST['roomnumber']);     
+           increasedownloadcount($filename,$_POST['downloadbroadcastchannel'],$_POST['roomnumber'],$conn);     
            
            $file = ("result/$filename");
            $filetype=filetype($file);
-           $filename=basename($file);
-           header ("Content-Type: ".$filetype);
-           header ("Content-Length: ".filesize($file));
-           header ("Content-Disposition: attachment; filename=".$filename);
-           readfile($file);
+             $_SESSION['downloadavailable']=1;
+          
+              $filename=basename($file);
+              sleep(2);
+              header('Location:ty.php?file='.$filename);
+          //  header ("Content-Type: application/octet-stream");
+          //  header ("Content-Length: ".filesize($file));
+          //  header ("Content-Disposition: attachment; filename=".$filename);
+          //    header('Pragma: public');
+          // flush();
+          //   readfile($file);
+          //   die();
+           
+           
+               
+
 
 
            
@@ -293,8 +346,8 @@ if(isset($_POST['download'])){
  }
 
 
-function delete_file_multiple( $broadcastchannel,$roomnumber){
-  $conn = mysqli_connect('localhost', 'root', '','instantsharing');
+function delete_file_multiple( $broadcastchannel,$roomnumber,$conn){
+  // $conn = mysqli_connect('localhost', 'root', '','instantsharing');
   $sql = "DELETE FROM storage  WHERE broadcastchannel= '$broadcastchannel' and roomnumber = '$roomnumber' ";
     if (!mysqli_query($conn, $sql)) {
         echo "deletion error".mysqli_error($conn);

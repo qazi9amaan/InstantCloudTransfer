@@ -270,7 +270,7 @@ font-size: 32px;
     <nav class="navbar navbar-expand-lg  navbar-dark navbar-ct-black   absolute-top">
       <div class="container">
       <div class="collapse navbar-end navbar-collapse" id="navbarSupportedContent">
-  <a data-user = "<?php echo $_SESSION['broadcastchannel']; ?>" class="navbar-brand check" href="#" id= "channelname" style="MAX-WIDTH: 123PX;
+  <a data-user = "<?php echo $_SESSION['broadcastchannel']; ?>" class="navbar-brand check" href="index.php" id= "channelname" style="MAX-WIDTH: 123PX;
     PADDING-LEFT: 10PX;
     font-size: 25px;
     font-weight: 400;
@@ -303,7 +303,12 @@ font-size: 32px;
   <div class="collapse navbar-end navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav  ml-auto">
                     
-                   
+                   <li class="nav-item  ">
+                          <a href="account.php" class="nav-link">
+                               <i class="pe-7s-users"></i>
+                                  <p>Forums</p>
+                          </a>
+                    </li>  
                      
                        <li class="nav-item active ">
                           <a href="account.php" class="nav-link">
@@ -351,7 +356,7 @@ font-size: 32px;
   <li class="nav-item mr-2">
     <a class="nav-link " href="forum\forum-main.php">
         <i class="pe-7s-users"></i>
-                                <p>Forum</p>
+                                <p> My Forum</p>
 
     </a>
   </li>

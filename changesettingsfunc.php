@@ -1,6 +1,6 @@
 <?php
 		session_start();
-	$conn = mysqli_connect('localhost', 'root', '' ,'instantsharing');
+	include('connection.php');
 
 
 		if(isset($_GET["deleteaccount"])&&isset($_GET["user"])){

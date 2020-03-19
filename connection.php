@@ -1,13 +1,13 @@
-<? php
+<?php
 	
 		 $dbhost = "localhost";
 		 $dbuser = "root";
 		 $dbpass = "";
-		 $db = "cloudshare";
-		 $con = mysqli_connect($dbhost, $dbuser, $dbpass,$db);
+		 $db = "instantsharing";
+		 $conn = mysqli_connect($dbhost, $dbuser, $dbpass,$db);
 
 			// Check connection
-			if (!$con) {
+			if (!$conn) {
 			    die("Connection failed: " . mysqli_connect_error());
 			}
 		

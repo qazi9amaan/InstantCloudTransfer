@@ -1,5 +1,5 @@
 <?php  
- $connect = mysqli_connect("localhost", "root", "", "instantsharing");  
+ include('connection.php'); 
 
  if(isset($_POST['id'])){
     $sql = "DELETE FROM storage WHERE bid = '".$_POST["id"]."'";  

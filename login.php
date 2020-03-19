@@ -20,6 +20,14 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
      <link href="css/ct-navbar.css" rel="stylesheet" />  
     <title>Kirangle | Login Now</title>
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+<!-- Google Fonts -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+<!-- Bootstrap core CSS -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+<!-- Material Design Bootstrap -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.14.1/css/mdb.min.css" rel="stylesheet">
   </head>
 
   <style>
@@ -255,7 +263,7 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6, p, .navbar, .brand {
                   </div>
                 </div>
                 <div class="col col-sm-12 col-md-6 col-lg-6 login-form-2">
-                  <h1 class="display-3">VIEW YOUR CHANNEL</h1>
+                  <h1 class="display-4">VIEW YOUR CHANNEL</h1><br>
                     
                     <form action="authentication.php"  method="post">
                         <div class="form-group">
@@ -272,8 +280,35 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6, p, .navbar, .brand {
                 </div>
             </div>
         </div>
+<br> <br>
+   <!-- Footer -->
+<footer class="page-footer font-small unique-color-dark pt-4">
 
+  <!-- Footer Elements -->
+  <div class="container ">
 
+    <!-- Call to action -->
+    <ul class="list-unstyled list-inline text-center py-2">
+      <li class="list-inline-item">
+        <h5 class="mb-1">Dont have a channel? Create now</h5>
+      </li>
+      <li class="list-inline-item">
+        <a href="newaccount.php" class="btn btn-outline-white btn-rounded">Sign up!</a>
+      </li>
+    </ul>
+    <!-- Call to action -->
+
+  </div>
+  <!-- Footer Elements -->
+
+  <!-- Copyright -->
+  <div class="footer-copyright text-center py-3">© 2020 Copyright:
+    <a href="https://kirangle.com/"> Kirangle.com</a>
+  </div>
+  <!-- Copyright -->
+
+</footer>
+<!-- Footer -->
 
 
 

@@ -58,5 +58,17 @@ sql> create table images(
 <img src = "/images/5.png">
 <br>
 <p> Provide the credientials to view the message </p>
+<img src = "/images/01.png">
+<br>
+<h3> Login </h3>
+<p> Register your channel name and login to post from your channel, this channel name will be explicit to you only </p>
 <img src = "/images/6.png">
-
+<br>
+<h3>Download using the short link</h3>
+<p> Once your files are uploaded we provide you with a download url which leads you here </p>
+<img src = "/images/02.png">
+<br>
+<h1>URL SHORTNER</h1>
+<p> You can shorten your links using our shortner </p>
+<img src = "/images/03.png">
+<br>

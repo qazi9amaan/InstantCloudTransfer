@@ -38,4 +38,25 @@ sql> create table images(
       CONSTRAINT PRIMARY KEY(broadcastname,broadcastroom) 
       )
 
+<h1> SNAPSHOTS </h1>
+<h3> Kirangle, Share & Download</h3>
 <img src = "/images/1.png">
+<br>
+<h3> Broadcasting your files </h3>
+<p>Write a unique channel name and room number and share the same with the person you want to share files with</p>
+<img src = "/images/2.png">
+<br>
+<h3>Upload multiple files </h3>
+<img src = "/images/3.png">
+<br>
+<h3> Download</h3>
+<p>Provide the channel name and room number given by the person who shared files </p>
+<img src = "/images/4.png">
+<br>
+<h3> Text Sharing</h3>
+<p> Choose a unique number and give a file name to your file and write the message </p>
+<img src = "/images/5.png">
+<br>
+<p> Provide the credientials to view the message </p>
+<img src = "/images/6.png">
+
